@@ -2,6 +2,7 @@
         <head>
         <title>cp2025_hw</title>
         <meta charset="utf-8">
+<meta property="head" content="H1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -95,6 +96,7 @@ img.add_border {
 </head>
 <body>
 <div class='container'><nav>
+        
     <div class="site-wrap">
 
     <div class="site-mobile-menu">
@@ -140,4 +142,100 @@ img.add_border {
           </div>
           
         </header>
-    </nav><section><h1>SMap</h1><div id="tipue_search_content"></div><ul><li><a href='About.html'>About</a><li><a href='w3.html'>w3</a><li><a href='Brython.html'>Brython</a><ul><li><a href='Pyodide3.html'>Pyodide3</a></li></ul></section></div></body></html>
+    <div id="tipue_search_content">About << <a href='About.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython<br /><h1>w3</h1>
+<p><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/41423230zhang/763a418467cd0cdf5939d5f6226df750/raw/c37d9df6d7a5b121a2b53f99d867373d59b0eae4/w3_1.py">w3_1</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">################################################
+# 以下為導入 brython_robot 進行動態模擬的起始內容
+################################################
+# 導入 brython_robot.py 並設為 robot
+import brython_robot as robot
+# 導入 Brython browser 模組中的 timer
+# 以便讓 AnimatedRobot 可以正常運作
+from browser import timer
+
+# 初始化世界與機器人
+# 利用 robot 物件中的 World 方法
+# 建立一個 10x10 的模擬世界
+xx=11
+yy=9
+w = robot.World(11,9)
+x = xx-1
+y = yy//2
+z = yy
+k = xx
+# 利用 robot 物件的 AnimatedRobot 方法
+# 針對 w 進行動態模擬, 且讓機器人位於 (1, 1)
+r = robot.AnimatedRobot(w, 1, 1)
+################################################
+# 範例 1
+# 基本變數與數值操作
+################################################
+# r 為透過上列程式所建立的動態模擬機器人物件
+steps = 3
+# 讓機器人往前移動 steps 步數
+def turn_left():
+    r.turn_left()
+    r.turn_left()
+    r.turn_left()
+for two_line in range(y):
+    r.move(x)
+    r.turn_left()
+    r.move(1)
+    r.turn_left()
+    r.move(x)
+    turn_left()
+    r.move(1)
+    turn_left()
+if z % 2 != 0:
+    r.move(k-1)</pre>
+<p></p><br />About << <a href='About.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
+        
+    <!-- footer -->
+      <div class="container">
+        <div class="row pt-3 mx-auto">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+        </div>
+      </div>
+    <!-- for footer -->
+    
+        </div> <!-- for site wrap -->
+            <!-- <script src="../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+            <script src="../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery-ui.js"></script>
+            <script src="../cmsimde/static/chimper/js/popper.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+            <script src="../cmsimde/static/chimper/js/aos.js"></script>
+            <!--
+            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+                    <script>
+                    var typed = new Typed('.typed-words', {
+                    strings: ["Web Apps"," WordPress"," Mobile Apps"],
+                    typeSpeed: 80,
+                    backSpeed: 80,
+                    backDelay: 4000,
+                    startDelay: 1000,
+                    loop: true,
+                    showCursor: true
+                    });
+                    </script>
+            -->
+            <script src="../cmsimde/static/chimper/js/main.js"></script>
+        
+<!-- 啟用 LaTeX equations 編輯 -->
+  <!-- <script>
+  MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\(', '\)']]}
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+    </body></html>
+        
