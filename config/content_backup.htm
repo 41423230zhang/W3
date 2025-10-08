@@ -12,8 +12,222 @@
 <p style="padding-left: 60px;">w17 (<span style="background-color: #ccffcc;">1b 採 Youtube 影片簡報</span>): 計算機程式課程學到了什麼？</p>
 <p style="padding-left: 60px;">w18: 課程總結</p>
 <p style="padding-left: 30px;"><span style="background-color: #ffff00;">個人與分組網站維護 (40%)</span> - 每週至少兩次推送與課程進度相關的學習內容與心得。</p>
-<p style="padding-left: 60px;">w9 期中自評、w18 期末自評</p>
-<h1>w3</h1><h1>Brython</h1>
+<p style="padding-left: 60px;">w9 期中自評、w18 期末自評</p><h1>Code</h1>
+<p><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/41423230zhang/763a418467cd0cdf5939d5f6226df750/raw/c37d9df6d7a5b121a2b53f99d867373d59b0eae4/w3_1.py">w3_1</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">################################################
+# 以下為導入 brython_robot 進行動態模擬的起始內容
+################################################
+# 導入 brython_robot.py 並設為 robot
+import brython_robot as robot
+# 導入 Brython browser 模組中的 timer
+# 以便讓 AnimatedRobot 可以正常運作
+from browser import timer
+
+# 初始化世界與機器人
+# 利用 robot 物件中的 World 方法
+# 建立一個 10x10 的模擬世界
+xx=11
+yy=9
+w = robot.World(11,9)
+x = xx-1
+y = yy//2
+z = yy
+k = xx
+# 利用 robot 物件的 AnimatedRobot 方法
+# 針對 w 進行動態模擬, 且讓機器人位於 (1, 1)
+r = robot.AnimatedRobot(w, 1, 1)
+################################################
+# 範例 1
+# 基本變數與數值操作
+################################################
+# r 為透過上列程式所建立的動態模擬機器人物件
+steps = 3
+# 讓機器人往前移動 steps 步數
+def turn_left():
+    r.turn_left()
+    r.turn_left()
+    r.turn_left()
+for two_line in range(y):
+    r.move(x)
+    r.turn_left()
+    r.move(1)
+    r.turn_left()
+    r.move(x)
+    turn_left()
+    r.move(1)
+    turn_left()
+if z % 2 != 0:
+    r.move(k-1)</pre>
+<p></p>
+<p><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/41423230zhang/f426135ece9b6ca0cbd4a57974bca0ec/raw/609f56f72e60478ba602839cc68c8582547a52cb/gistfile1.txt">w3_2</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 初始化世界與機器人
+# 利用 robot 物件中的 World 方法
+# 建立一個 10x10 的模擬世界
+xx=11
+yy=9
+w = robot.World(xx,yy)
+x = xx//2
+y = yy-1
+z = xx
+k = yy
+# 利用 robot 物件的 AnimatedRobot 方法
+# 針對 w 進行動態模擬, 且讓機器人位於 (1, 1)
+r = robot.AnimatedRobot(w, 1, 1)
+################################################
+# 範例 1
+# 基本變數與數值操作
+################################################
+# r 為透過上列程式所建立的動態模擬機器人物件
+steps = 3
+# 讓機器人往前移動 steps 步數
+def turn_left():
+r.turn_left()
+r.turn_left()
+r.turn_left()
+for two_line in range(x):
+r.turn_left()
+r.move(y)
+turn_left()
+r.move(1)
+turn_left()
+r.move(y)
+r.turn_left()
+r.move(1)
+if z % 2 != 0:
+r.turn_left()
+r.move(k-1)</pre>
+<p>1b_w4_showup.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import pandas as pd
+
+# === 讀取全班學生名單（學號\t姓名） ===
+stud_df = pd.read_csv("1b_stud_list.csv", encoding='utf-8')
+stud_df.drop_duplicates(subset=[stud_df.columns[0]], inplace=True)
+
+# 建立姓名→學號字典
+name_to_num = {}
+for row in stud_df.iloc[:, 0]:
+    parts = row.split('\t')
+    if len(parts) &gt;= 2:
+        student_num = parts[0].strip()
+        student_name = parts[1].strip()
+        name_to_num[student_name] = student_num
+
+# === 讀取出席名單 ===
+show_df = pd.read_csv("1b_w4.csv", encoding='utf-16')
+show_df.drop_duplicates(subset=[show_df.columns[0]], inplace=True)
+names_list = show_df.iloc[:, 0].dropna().tolist()
+
+# 將出席姓名轉為學號
+showup_nums = []
+for name in names_list:
+    if isinstance(name, str):
+        student_name = name.split('\t')[0].strip()  # 只取姓名部分
+        if student_name in name_to_num:
+            showup_nums.append(name_to_num[student_name])
+
+# 去重並依學號排序
+showup_nums = sorted(list(set(showup_nums)), key=lambda x: int(x))
+
+# === 輸出 CSV ===
+pd.DataFrame(showup_nums, columns=["學號"]).to_csv("1b_w4_showup.csv", index=False, encoding="utf-8-sig")
+
+print(f"✅ 已將出席名單轉為學號並輸出至 1b_w4_showup.csv，共 {len(showup_nums)} 位學生")
+</pre>
+<p>1b_stud_list.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import pandas as pd
+
+# === 讀取全班學生名單 ===
+stud_df = pd.read_csv("1b_stud_list.csv", encoding='utf-8')
+stud_df.drop_duplicates(subset=[stud_df.columns[0]], inplace=True)
+
+# 建立姓名→學號字典
+a_dict = {}
+for row in stud_df.iloc[:, 0]:
+    parts = row.split('\t')
+    if len(parts) &gt;= 2:
+        student_num = parts[0].strip()
+        student_name = parts[1].strip()
+        a_dict[student_name] = student_num
+
+# 全部學生名單
+all_students = set(a_dict.keys())
+
+# === 讀取出席名單 ===
+show_df = pd.read_csv("1b_w4.csv", encoding='utf-16')
+show_df.drop_duplicates(subset=[show_df.columns[0]], inplace=True)
+names_list = show_df.iloc[:, 0].dropna().tolist()
+
+# 整理出席名單
+showup_names = set()
+for entry in names_list:
+    if isinstance(entry, str):
+        parts = entry.split('\t')
+        student_name = parts[0].strip() if len(parts) &gt;= 1 else entry.strip()
+        if student_name:
+            showup_names.add(student_name)
+
+# === 比對出席與缺席 ===
+present_names = showup_names &amp; all_students
+absent_names = all_students - showup_names
+
+# 轉換成列表（學號、姓名）
+# 這裡加上 key=lambda x: int(x[0])，依學號數值排序
+present_list = sorted([(a_dict[name], name) for name in present_names], key=lambda x: int(x[0]))
+absent_list = sorted([(a_dict[name], name) for name in absent_names], key=lambda x: int(x[0]))
+
+# === 輸出結果 ===
+print("✅ 出席名單（依座號排序）：")
+for i, (num, name) in enumerate(present_list, start=1):
+    print(f"{i:2d}. {num}\t{name}")
+
+print("\n❌ 缺席名單（依座號排序）：")
+for i, (num, name) in enumerate(absent_list, start=1):
+    print(f"{i:2d}. {num}\t{name}")
+
+# === 輸出 CSV ===
+pd.DataFrame(present_list, columns=["學號", "姓名"]).to_csv("1b_present.csv", index=False, encoding="utf-8-sig")
+pd.DataFrame(absent_list, columns=["學號", "姓名"]).to_csv("1b_absent.csv", index=False, encoding="utf-8-sig")
+
+print("\n📁 已輸出兩份檔案：1b_present.csv（出席）與 1b_absent.csv（缺席）")
+</pre>
+<p><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/41423230zhang/615587b6029cf46170ef3a2fda826f38/raw/0523868027b2ebbbbd693ba9491352c95dd29e4e/1b_stud_list.py">1b_w4_showup.py</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import pandas as pd
+
+# === 讀取全班學生名單（學號\t姓名） ===
+stud_df = pd.read_csv("1b_stud_list.csv", encoding='utf-8')
+stud_df.drop_duplicates(subset=[stud_df.columns[0]], inplace=True)
+
+# 建立姓名→學號字典
+name_to_num = {}
+for row in stud_df.iloc[:, 0]:
+    parts = row.split('\t')
+    if len(parts) &gt;= 2:
+        student_num = parts[0].strip()
+        student_name = parts[1].strip()
+        name_to_num[student_name] = student_num
+
+# === 讀取出席名單 ===
+show_df = pd.read_csv("1b_w4.csv", encoding='utf-16')
+show_df.drop_duplicates(subset=[show_df.columns[0]], inplace=True)
+names_list = show_df.iloc[:, 0].dropna().tolist()
+
+# 將出席姓名轉為學號
+showup_nums = []
+for name in names_list:
+    if isinstance(name, str):
+        student_name = name.split('\t')[0].strip()  # 只取姓名部分
+        if student_name in name_to_num:
+            showup_nums.append(name_to_num[student_name])
+
+# 去重並依學號排序
+showup_nums = sorted(list(set(showup_nums)), key=lambda x: int(x))
+
+# === 輸出 CSV ===
+pd.DataFrame(showup_nums, columns=["學號"]).to_csv("1b_w4_showup.csv", index=False, encoding="utf-8-sig")
+
+print(f"✅ 已將出席名單轉為學號並輸出至 1b_w4_showup.csv，共 {len(showup_nums)} 位學生")
+</pre>
+<p></p><h1>Brython</h1>
 <p><a href="https://brython.info/">Brython</a> 是一個將 <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> 語法編譯為 <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript">JavaScript</a> 的工具，能直接在瀏覽器中以 <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> 撰寫前端網頁程式。</p>
 <p><button id="add1to100">1 add to 100</button><button id="robot1">機器人巡邏</button><button id="free_walk">自由行</button></p>
 <!-- 導入 brython 程式庫 -->
